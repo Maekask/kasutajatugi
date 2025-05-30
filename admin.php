@@ -27,38 +27,46 @@ $unsolved = $total - $solved;
 $result = $conn->query("SELECT * FROM probleemid ORDER BY created_at DESC");
 ?>
 
-<h2>Administreerimisliides</h2>
-<p><strong>Kokku pöördumisi:</strong> <?= $total ?> | 
-<strong>Lahendatud:</strong> <?= $solved ?> | 
-<strong>Lahendamata:</strong> <?= $unsolved ?></p>
+<div class="container my-4">
+  <h2>Administreerimisliides</h2>
+  <p><strong>Kokku pöördumisi:</strong> <?= $total ?> | 
+     <strong>Lahendatud:</strong> <?= $solved ?> | 
+     <strong>Lahendamata:</strong> <?= $unsolved ?></p>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>ID</th><th>Nimi</th><th>Osakond</th><th>Kontakt</th><th>Probleem</th><th>Staatus</th><th>Tegevused</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php while ($row = $result->fetch_assoc()): ?>
-    <tr>
-      <td><?= $row['id'] ?></td>
-      <td><?= htmlspecialchars($row['nimi']) ?></td>
-      <td><?= htmlspecialchars($row['osakond']) ?></td>
-      <td><?= htmlspecialchars($row['kontakt']) ?></td>
-      <td><?= nl2br(htmlspecialchars($row['probleem'])) ?></td>
-      <td>
-        <?= $row['staatus'] == 'lahendatud' ? '<span class="badge bg-success">Tehtud</span>' : '<span class="badge bg-warning text-dark">Lahendamata</span>' ?>
-      </td>
-      <td>
-        <?php if ($row['staatus'] !== 'lahendatud'): ?>
-          <a href="?done=<?= $row['id'] ?>" class="btn btn-sm btn-success">Märgi tehtuks</a>
-        <?php endif; ?>
-        <a href="?delete=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Kustutada pöördumine?')">Kustuta</a>
-      </td>
-    </tr>
-    <?php endwhile; ?>
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th><th>Nimi</th><th>Osakond</th><th>Kontakt</th><th>Probleem</th><th>Staatus</th><th>Tegevused</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php while ($row = $result->fetch_assoc()): ?>
+        <tr>
+          <td><?= $row['id'] ?></td>
+          <td><?= htmlspecialchars($row['nimi']) ?></td>
+          <td><?= htmlspecialchars($row['osakond']) ?></td>
+          <td><?= htmlspecialchars($row['kontakt']) ?></td>
+          <td><?= nl2br(htmlspecialchars($row['probleem'])) ?></td>
+          <td>
+            <?= $row['staatus'] == 'lahendatud'
+              ? '<span class="badge bg-success">Tehtud</span>'
+              : '<span class="badge bg-warning text-dark">Lahendamata</span>' ?>
+          </td>
+          <td>
+            <div class="d-flex gap-1 flex-wrap">
+              <?php if ($row['staatus'] !== 'lahendatud'): ?>
+                <a href="?done=<?= $row['id'] ?>" class="btn btn-sm btn-success">Märgi tehtuks</a>
+              <?php endif; ?>
+              <a href="?delete=<?= $row['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Kustutada pöördumine?')">Kustuta</a>
+            </div>
+          </td>
+        </tr>
+        <?php endwhile; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <?php include('includes/footer.php'); ?>
 

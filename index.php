@@ -19,27 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<h2>Esita probleem</h2>
-<?php if ($error) echo "<div class='alert alert-danger'>$error</div>"; ?>
-<form method="post">
-  <div class="mb-3">
-    <label class="form-label">Nimi</label>
-    <input type="text" name="nimi" class="form-control" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Osakond</label>
-    <input type="text" name="osakond" class="form-control" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Kontakt</label>
-    <input type="text" name="kontakt" class="form-control" required>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Probleemi kirjeldus</label>
-    <textarea name="probleem" class="form-control" rows="4" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Saada</button>
-</form>
+<div class="container my-4">
+  <h2>Esita probleem</h2>
+  <?php if ($error) echo "<div class='alert alert-danger'>$error</div>"; ?>
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Nimi</label>
+      <input type="text" name="nimi" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Osakond</label>
+      <input type="text" name="osakond" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Kontakt</label>
+      <input type="text" name="kontakt" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Probleemi kirjeldus</label>
+      <textarea name="probleem" class="form-control" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Saada</button>
+  </form>
+</div>
 
 <?php include('includes/footer.php'); ?>
 
