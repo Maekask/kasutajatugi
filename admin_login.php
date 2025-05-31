@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include('includes/header.php');
+
 // Admini parool (hashi loomiseks kasuta password_hash)
 $admin_hash = '$2y$10$cGF0YnDw0NJEIKB4E2vsK.dFP5U5u5UysCwBmvMkrrf17XwPh76ne'; // parool: admin123
 
@@ -24,3 +26,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <button type="submit" class="btn btn-primary">Logi sisse</button>
 </form>
 
+<?php include('includes/footer.php'); ?>
